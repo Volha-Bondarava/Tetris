@@ -18,7 +18,7 @@ class GameTetris extends JFrame {
     private final int UP = 38;
     private final int RIGHT = 39;
     private final int DOWN = 40;
-    private final int SHOW_DELAY = 400;     // animation delay
+    private int SHOW_DELAY = 400;     // animation delay
     private final int[][][] SHAPES = {
             {{0, 0, 0, 0}, {1, 1, 1, 1}, {0, 0, 0, 0}, {0, 0, 0, 0}, {4, 0x00f0f0}}, // I
             {{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}, {4, 0xf0f000}}, // O
@@ -109,6 +109,7 @@ class GameTetris extends JFrame {
         }
         if (countFillRows > 0) {
             gameScore += SCORES[countFillRows - 1];
+            SHOW_DELAY -= 5;
             setTitle(TITLE_OF_PROGRAM + " : " + gameScore);
         }
     }
@@ -189,13 +190,15 @@ class GameTetris extends JFrame {
         void rotateShape(int direction) {
             for (int i = 0; i < size / 2; i++)
                 for (int j = i; j < size - 1 - i; j++)
-                    if (direction == RIGHT) { // clockwise
+                    if (direction == RIGHT) {
+                        // clockwise
                         int tmp = shape[size - 1 - j][i];
                         shape[size - 1 - j][i] = shape[size - 1 - i][size - 1 - j];
                         shape[size - 1 - i][size - 1 - j] = shape[j][size - 1 - i];
                         shape[j][size - 1 - i] = shape[i][j];
                         shape[i][j] = tmp;
-                    } else { // counterclockwise
+                    } else {
+                        // counterclockwise
                         int tmp = shape[i][j];
                         shape[i][j] = shape[j][size - 1 - i];
                         shape[j][size - 1 - i] = shape[size - 1 - i][size - 1 - j];
