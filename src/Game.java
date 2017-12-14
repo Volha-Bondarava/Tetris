@@ -2,7 +2,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
-
+//TODO
+//1) create @Replay@ button
+//2) create @Start@ button
 class GameTetris extends JFrame {
 
     private final String TITLE_OF_PROGRAM = "Tetris";
