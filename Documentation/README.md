@@ -27,11 +27,11 @@
 ### **2.2 Интерфейс пользователя**
 Игра имеет следующий внешний вид:
 
-![alt-текст](https://github.com/OlgaBondareva/Tetris/blob/master/Documentation/tetris.jpg "Внешний вид игры")
+![alt-текст](https://github.com/OlgaBondareva/Tetris/blob/master/Documentation/Images/tetris.jpg "Внешний вид игры")
 
-![alt-текст](https://github.com/OlgaBondareva/Tetris/blob/master/Documentation/tetris1.jpg "Внешний вид игры")
+![alt-текст](https://github.com/OlgaBondareva/Tetris/blob/master/Documentation/Images/tetris1.jpg "Внешний вид игры")
 
-![alt-текст](https://github.com/OlgaBondareva/Tetris/blob/master/Documentation/gameOver.jpg "Game Over")
+![alt-текст](https://github.com/OlgaBondareva/Tetris/blob/master/Documentation/Images/gameOver.jpg "Game Over")
 
 ### **2.3 Характеристики пользователей**
 Целевая аудитория приложения - люди любого возраста.
