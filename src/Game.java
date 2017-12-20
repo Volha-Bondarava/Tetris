@@ -2,24 +2,25 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.*;
-//TODO
-//1) create @Replay@ button
-//2) create @Start@ button
+
+import static java.lang.System.exit;
+
 class GameTetris extends JFrame {
 
     private final String TITLE_OF_PROGRAM = "Tetris";
     private final int BLOCK_SIZE = 25;      // size of one block
     private final int ARC_RADIUS = 6;
-    private final int FIELD_WIDTH = 10;     // size of game's field in blocks
+    private final int FIELD_WIDTH = 11;     // size of game's field in blocks
     private final int FIELD_HEIGHT = 18;
     private final int START_LOCATION = 180;
     private final int FIELD_DX = 7;         // determined experimentally
-    private final int FIELD_DY = 26;
+    private final int FIELD_DY = 53;
     // key codes
     private final int LEFT = 37;
     private final int UP = 38;
     private final int RIGHT = 39;
     private final int DOWN = 40;
+
     private int SHOW_DELAY = 400;     // animation delay
     private final int[][][] SHAPES = {
             {{0, 0, 0, 0}, {1, 1, 1, 1}, {0, 0, 0, 0}, {0, 0, 0, 0}, {4, 0x00f0f0}}, // I
@@ -50,9 +51,34 @@ class GameTetris extends JFrame {
             {1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0},
             {1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0},
             {0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0}};
+    private Color backGroundColor;
+
+    private JMenuBar jMenuBar = new JMenuBar();
+    private JMenu jMenu = new JMenu("Menu");
+    private JMenu jColorMenu = new JMenu("Background color");
+    //a group of JMenuItems
+    private JMenuItem restartItem = new JMenuItem("Restart", KeyEvent.VK_T);
+    private JMenuItem showRulesItem = new JMenuItem("Game's rules", KeyEvent.VK_T);
+    private JMenuItem exitItem = new JMenuItem("Exit");
+    //background colors to choose from
+    private JMenuItem blackItem = new JMenuItem("Black");
+    private JMenuItem pinkItem = new JMenuItem("Pink");
+    private JMenuItem blueItem = new JMenuItem("Blue");
+    private JMenuItem cyanItem = new JMenuItem("Cyan");
+    private JMenuItem greenItem = new JMenuItem("Green");
+    private JMenuItem darkGrayItem = new JMenuItem("Dark Gray");
+    private JMenuItem lightGrayItem = new JMenuItem("Light Gray");
+    private JMenuItem magentaItem = new JMenuItem("Magenta");
+    private JMenuItem orangeItem = new JMenuItem("Orange");
+    private JMenuItem grayItem = new JMenuItem("Gray");
+    private JMenuItem redItem = new JMenuItem("Red");
+    private JMenuItem whiteItem = new JMenuItem("White");
+    private JMenuItem yellowItem = new JMenuItem("Yellow");
 
     public static void main(String[] args) {
-        new GameTetris().go();
+        while (true) {
+            new GameTetris().go();
+        }
     }
 
     private GameTetris() {
@@ -60,17 +86,178 @@ class GameTetris extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(START_LOCATION, START_LOCATION, FIELD_WIDTH * BLOCK_SIZE + FIELD_DX, FIELD_HEIGHT * BLOCK_SIZE + FIELD_DY);
         setResizable(false);
-        canvas.setBackground(Color.PINK); // define the background color
+
+        backGroundColor = Color.BLACK;
+        canvas.setBackground(backGroundColor); // define the background color
+
+        canvas.add(jMenuBar);
+        canvas.add(jMenu);
+        canvas.add(jColorMenu);
+        canvas.add(restartItem);
+        canvas.add(showRulesItem);
+        canvas.add(blackItem);
+        canvas.add(pinkItem);
+        canvas.add(blueItem);
+        canvas.add(cyanItem);
+        canvas.add(greenItem);
+        canvas.add(darkGrayItem);
+        canvas.add(lightGrayItem);
+        canvas.add(magentaItem);
+        canvas.add(orangeItem);
+        canvas.add(grayItem);
+        canvas.add(redItem);
+        canvas.add(whiteItem);
+        canvas.add(yellowItem);
+        canvas.add(exitItem);
+
+        setJMenuBar(jMenuBar);
+
+        jMenuBar.add(jMenu);
+
+        jMenu.add(jColorMenu);
+        jMenu.add(restartItem);
+        jMenu.add(showRulesItem);
+        jMenu.add(jColorMenu);
+        jMenu.add(exitItem);
+
+        jColorMenu.add(blackItem);
+        jColorMenu.add(pinkItem);
+        jColorMenu.add(blueItem);
+        jColorMenu.add(cyanItem);
+        jColorMenu.add(greenItem);
+        jColorMenu.add(darkGrayItem);
+        jColorMenu.add(lightGrayItem);
+        jColorMenu.add(magentaItem);
+        jColorMenu.add(orangeItem);
+        jColorMenu.add(grayItem);
+        jColorMenu.add(redItem);
+        jColorMenu.add(whiteItem);
+        jColorMenu.add(yellowItem);
+
         addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if (!gameOver) {
-                    if (e.getKeyCode() == DOWN) figure.drop();
-                    if (e.getKeyCode() == UP) figure.rotate();
-                    if (e.getKeyCode() == LEFT || e.getKeyCode() == RIGHT) figure.move(e.getKeyCode());
+                    if (e.getKeyCode() == DOWN)
+                        figure.drop();
+                    if (e.getKeyCode() == UP)
+                        figure.rotate();
+                    if (e.getKeyCode() == LEFT || e.getKeyCode() == RIGHT)
+                        figure.move(e.getKeyCode());
+                } else {
+                    canvas.repaint();
                 }
-                canvas.repaint();
             }
         });
+
+        restartItem.addActionListener(e -> {
+            gameOver = true;
+            dispose();
+        });
+
+        exitItem.addActionListener(e -> {
+            setVisible(false);
+            dispose();
+            exit(0);
+        });
+
+        blackItem.addActionListener(e -> {
+            backGroundColor = Color.BLACK;
+            canvas.setBackground(backGroundColor);
+            canvas.repaint();
+        });
+
+        pinkItem.addActionListener(e -> {
+            backGroundColor = Color.PINK;
+            canvas.setBackground(backGroundColor);
+            canvas.repaint();
+        });
+
+        blueItem.addActionListener(e -> {
+            backGroundColor = Color.BLUE;
+            canvas.setBackground(backGroundColor);
+            canvas.repaint();
+        });
+
+        cyanItem.addActionListener(e -> {
+            backGroundColor = Color.CYAN;
+            canvas.setBackground(backGroundColor);
+            canvas.repaint();
+        });
+
+        greenItem.addActionListener(e -> {
+            backGroundColor = Color.GREEN;
+            canvas.setBackground(backGroundColor);
+            canvas.repaint();
+        });
+
+        darkGrayItem.addActionListener(e -> {
+            backGroundColor = Color.DARK_GRAY;
+            canvas.setBackground(backGroundColor);
+            canvas.repaint();
+        });
+
+        lightGrayItem.addActionListener(e -> {
+            backGroundColor = Color.LIGHT_GRAY;
+            canvas.setBackground(backGroundColor);
+            canvas.repaint();
+        });
+
+        magentaItem.addActionListener(e -> {
+            backGroundColor = Color.MAGENTA;
+            canvas.setBackground(backGroundColor);
+            canvas.repaint();
+        });
+
+        orangeItem.addActionListener(e -> {
+            backGroundColor = Color.ORANGE;
+            canvas.setBackground(backGroundColor);
+            canvas.repaint();
+        });
+
+        grayItem.addActionListener(e -> {
+            backGroundColor = Color.GRAY;
+            canvas.setBackground(backGroundColor);
+            canvas.repaint();
+        });
+
+        redItem.addActionListener(e -> {
+            backGroundColor = Color.RED;
+            canvas.setBackground(backGroundColor);
+            canvas.repaint();
+        });
+
+        whiteItem.addActionListener(e -> {
+            backGroundColor = Color.WHITE;
+            canvas.setBackground(backGroundColor);
+            canvas.repaint();
+        });
+
+        yellowItem.addActionListener(e -> {
+            backGroundColor = Color.YELLOW;
+            canvas.setBackground(backGroundColor);
+            canvas.repaint();
+        });
+
+        showRulesItem.addActionListener(e -> {
+            JFrame jFrame = new JFrame();
+            JOptionPane.showMessageDialog(jFrame, "Rules of the game:\n" +
+                    "\n" +
+                    "The player has a rectangular field with a width of 10 and a height of 25 cells.\n From above to down figures fall. Each figure can be rotated \\nthrough 90° (\"Up\" key) and also move horizontally (\"Right\" or \"Left\" key).\n" +
+                    "You can also \"dump\" the figure (ie, accelerate its fall), when the \nplayer has already decided where the figure should fall (\"Down\" key). The figure \nflies until it rests another figure or it will not hit the bottom of the glass.\nIf at the same time a horizontal row of 10 cells is filled, then this series disappears, \\nand the player receives a certain number of points. All the rows above the missing \nare dropped down one square. The game ends when a new figure can not fit in \na play field.\n" +
+                    "Thus, the player's task is to fill the ranks without filling the play \nfield (vertically) as long as possible to get more points.\n" +
+                    "The game has no time limits, it all depends only on the vertical filling \nof the field and the availability of space for new figures.\n\n" +
+                    "Scoring:\n" +
+                    "1 line - 100 points,\n" +
+                    "2 lines - 300 points,\n" +
+                    "3 lines - 700 points,\n" +
+                    "4 lines (that is, make Tetris) - 1500 points.\n");
+        });
+
+        //set some keyboard shortcuts
+        restartItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
+        showRulesItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.CTRL_MASK));
+        exitItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_MASK));
+
         add(BorderLayout.CENTER, canvas);
         setVisible(true);
         Arrays.fill(mine[FIELD_HEIGHT], 1); // create a ground for mines
@@ -81,8 +268,8 @@ class GameTetris extends JFrame {
         while (!gameOver) {
             try {
                 Thread.sleep(SHOW_DELAY);
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
             canvas.repaint();
             checkFilling();
@@ -93,6 +280,13 @@ class GameTetris extends JFrame {
             } else
                 figure.stepDown();
         }
+        //delay after gameOver
+        try {
+            Thread.sleep(3000);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        dispose();
     }
 
     // check filling rows
@@ -256,6 +450,7 @@ class GameTetris extends JFrame {
 
     // my canvas for painting
     class Canvas extends JPanel {
+
         @Override
         public void paint(Graphics g) {
             super.paint(g);
