@@ -20,8 +20,9 @@ class GameTetris extends JFrame {
     private final int UP = 38;
     private final int RIGHT = 39;
     private final int DOWN = 40;
-
-    private int SHOW_DELAY = 400;     // animation delay
+    // animation delay
+    private int SHOW_DELAY = 400;
+    //figures
     private final int[][][] SHAPES = {
             {{0, 0, 0, 0}, {1, 1, 1, 1}, {0, 0, 0, 0}, {0, 0, 0, 0}, {4, 0x00f0f0}}, // I
             {{0, 0, 0, 0}, {0, 1, 1, 0}, {0, 1, 1, 0}, {0, 0, 0, 0}, {4, 0xf0f000}}, // O
@@ -160,98 +161,51 @@ class GameTetris extends JFrame {
             exit(0);
         });
 
-        blackItem.addActionListener(e -> {
-            backGroundColor = Color.BLACK;
-            canvas.setBackground(backGroundColor);
-            canvas.repaint();
-        });
+        blackItem.addActionListener(e -> setBackGroundColor(canvas, Color.BLACK));
 
-        pinkItem.addActionListener(e -> {
-            backGroundColor = Color.PINK;
-            canvas.setBackground(backGroundColor);
-            canvas.repaint();
-        });
+        pinkItem.addActionListener(e -> setBackGroundColor(canvas, Color.PINK));
 
-        blueItem.addActionListener(e -> {
-            backGroundColor = Color.BLUE;
-            canvas.setBackground(backGroundColor);
-            canvas.repaint();
-        });
+        blueItem.addActionListener(e -> setBackGroundColor(canvas, Color.BLUE));
 
-        cyanItem.addActionListener(e -> {
-            backGroundColor = Color.CYAN;
-            canvas.setBackground(backGroundColor);
-            canvas.repaint();
-        });
+        cyanItem.addActionListener(e -> setBackGroundColor(canvas, Color.CYAN));
 
-        greenItem.addActionListener(e -> {
-            backGroundColor = Color.GREEN;
-            canvas.setBackground(backGroundColor);
-            canvas.repaint();
-        });
+        greenItem.addActionListener(e -> setBackGroundColor(canvas, Color.GREEN));
 
-        darkGrayItem.addActionListener(e -> {
-            backGroundColor = Color.DARK_GRAY;
-            canvas.setBackground(backGroundColor);
-            canvas.repaint();
-        });
+        darkGrayItem.addActionListener(e -> setBackGroundColor(canvas, Color.DARK_GRAY));
 
-        lightGrayItem.addActionListener(e -> {
-            backGroundColor = Color.LIGHT_GRAY;
-            canvas.setBackground(backGroundColor);
-            canvas.repaint();
-        });
+        lightGrayItem.addActionListener(e -> setBackGroundColor(canvas, Color.LIGHT_GRAY));
 
-        magentaItem.addActionListener(e -> {
-            backGroundColor = Color.MAGENTA;
-            canvas.setBackground(backGroundColor);
-            canvas.repaint();
-        });
+        magentaItem.addActionListener(e -> setBackGroundColor(canvas, Color.MAGENTA));
 
-        orangeItem.addActionListener(e -> {
-            backGroundColor = Color.ORANGE;
-            canvas.setBackground(backGroundColor);
-            canvas.repaint();
-        });
+        orangeItem.addActionListener(e -> setBackGroundColor(canvas, Color.ORANGE));
 
-        grayItem.addActionListener(e -> {
-            backGroundColor = Color.GRAY;
-            canvas.setBackground(backGroundColor);
-            canvas.repaint();
-        });
+        grayItem.addActionListener(e -> setBackGroundColor(canvas, Color.GRAY));
 
-        redItem.addActionListener(e -> {
-            backGroundColor = Color.RED;
-            canvas.setBackground(backGroundColor);
-            canvas.repaint();
-        });
+        redItem.addActionListener(e -> setBackGroundColor(canvas, Color.RED));
 
-        whiteItem.addActionListener(e -> {
-            backGroundColor = Color.WHITE;
-            canvas.setBackground(backGroundColor);
-            canvas.repaint();
-        });
+        whiteItem.addActionListener(e -> setBackGroundColor(canvas, Color.WHITE));
 
-        yellowItem.addActionListener(e -> {
-            backGroundColor = Color.YELLOW;
-            canvas.setBackground(backGroundColor);
-            canvas.repaint();
-        });
+        yellowItem.addActionListener(e -> setBackGroundColor(canvas, Color.YELLOW));
 
-        showRulesItem.addActionListener(e -> {
-            JFrame jFrame = new JFrame();
-            JOptionPane.showMessageDialog(jFrame, "Rules of the game:\n" +
-                    "\n" +
-                    "The player has a rectangular field with a width of 10 and a height of 25 cells.\n From above to down figures fall. Each figure can be rotated \\nthrough 90° (\"Up\" key) and also move horizontally (\"Right\" or \"Left\" key).\n" +
-                    "You can also \"dump\" the figure (ie, accelerate its fall), when the \nplayer has already decided where the figure should fall (\"Down\" key). The figure \nflies until it rests another figure or it will not hit the bottom of the glass.\nIf at the same time a horizontal row of 10 cells is filled, then this series disappears, \\nand the player receives a certain number of points. All the rows above the missing \nare dropped down one square. The game ends when a new figure can not fit in \na play field.\n" +
-                    "Thus, the player's task is to fill the ranks without filling the play \nfield (vertically) as long as possible to get more points.\n" +
-                    "The game has no time limits, it all depends only on the vertical filling \nof the field and the availability of space for new figures.\n\n" +
-                    "Scoring:\n" +
-                    "1 line - 100 points,\n" +
-                    "2 lines - 300 points,\n" +
-                    "3 lines - 700 points,\n" +
-                    "4 lines (that is, make Tetris) - 1500 points.\n");
-        });
+        showRulesItem.addActionListener(e -> JOptionPane.showMessageDialog(this.canvas, "Rules of the game:\n\n" +
+                "The player has a rectangular field with a width of 10 and a height of 25 cells." +
+                "\n From above to down figures fall. Each figure can be rotated " +
+                "\nthrough 90° (\"Up\" key) and also move horizontally (\"Right\" or \"Left\" key).\n" +
+                "You can also \"dump\" the figure (i.e., accelerate its fall), when the " +
+                "\nplayer has already decided where the figure should fall (\"Down\" key). The figure \n"
+                + "flies until it rests another figure or it will not hit the bottom of the glass.\n"
+                + "If at the same time a horizontal row of 10 cells is filled, then this series disappears, \n"
+                + "and the player receives a certain number of points. All the rows above the missing \n"
+                + "are dropped down one square. The game ends when a new figure can not fit in \na play field.\n" +
+                "Thus, the player's task is to fill the ranks without filling the play \n"
+                + "field (vertically) as long as possible to get more points.\n" +
+                "The game has no time limits, it all depends only on the vertical filling \n"
+                + "of the field and the availability of space for new figures.\n\n" +
+                "Scoring:\n" +
+                "1 line - 100 points,\n" +
+                "2 lines - 300 points,\n" +
+                "3 lines - 700 points,\n" +
+                "4 lines (that is, make Tetris) - 1500 points.\n", null, JOptionPane.INFORMATION_MESSAGE));
 
         //set some keyboard shortcuts
         restartItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
@@ -261,6 +215,12 @@ class GameTetris extends JFrame {
         add(BorderLayout.CENTER, canvas);
         setVisible(true);
         Arrays.fill(mine[FIELD_HEIGHT], 1); // create a ground for mines
+    }
+
+    private void setBackGroundColor(Canvas canvas, Color color) {
+        this.backGroundColor = color;
+        canvas.setBackground(this.backGroundColor);
+        canvas.repaint();
     }
 
     // main loop of game
