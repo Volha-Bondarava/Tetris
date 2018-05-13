@@ -5,7 +5,7 @@ import java.util.*;
 
 import static java.lang.System.exit;
 
-class GameTetris extends JFrame {
+public class GameTetris extends JFrame {
 
     private final String TITLE_OF_PROGRAM = "Tetris";
     private final int BLOCK_SIZE = 25;      // size of one block
@@ -190,7 +190,7 @@ class GameTetris extends JFrame {
         showRulesItem.addActionListener(e -> JOptionPane.showMessageDialog(this.canvas, "Rules of the game:\n\n" +
                 "The player has a rectangular field with a width of 10 and a height of 25 cells." +
                 "\n From above to down figures fall. Each figure can be rotated " +
-                "\nthrough 90° (\"Up\" key) and also move horizontally (\"Right\" or \"Left\" key).\n" +
+                "\nthrough 90ï¿½ (\"Up\" key) and also move horizontally (\"Right\" or \"Left\" key).\n" +
                 "You can also \"dump\" the figure (i.e., accelerate its fall), when the " +
                 "\nplayer has already decided where the figure should fall (\"Down\" key). The figure \n"
                 + "flies until it rests another figure or it will not hit the bottom of the glass.\n"
