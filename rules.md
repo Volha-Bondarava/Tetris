@@ -1,4 +1,4 @@
-﻿**Rules of the game:**  
+**[English] Rules of the game:**  
 
 The player has a rectangular field with a width of 10 and a height of 25 cells.  
 Figures fall from above to down. Each figure can be rotated through 90° ("Up" key) and also move horizontally ("Right" or "Left" key).  
